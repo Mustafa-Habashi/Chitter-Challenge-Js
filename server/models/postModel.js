@@ -5,7 +5,11 @@ const postSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    text: { type: String }
+    text: { type: String },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
 });
 
 const Posts = mongoose.model(`Post`, postSchema);
