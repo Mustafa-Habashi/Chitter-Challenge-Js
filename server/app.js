@@ -5,7 +5,9 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 
+
 import { router as addProfile } from "../server/routes/addProfile.js";
+import { router as login } from '../server/routes/login.js'
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -26,6 +28,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(`/register`, addProfile);
+app.use(`/login`, login);
 
 
 dbConnection();

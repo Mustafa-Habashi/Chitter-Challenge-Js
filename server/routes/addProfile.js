@@ -7,11 +7,10 @@ router
     .route(`/`)
     .post(
         [
-            check("userId").exists().isNumeric(),
             check("name").exists().trim().escape(),
-            check("email").exists().trim().escape(),
-            check("contactNum").exists().trim().isNumeric(),
-            check("gender").exists().trim().escape(),
+            check("userName").exists().trim(),
+            check("email").exists().trim().escape().isEmail(),
+            check("password").exists().trim().escape(),
 
         ],
         async (req, res) => {
@@ -20,12 +19,14 @@ router
             if (!errors.isEmpty()) {
                 console.log(errors);
                 return res.status(422).json({
-                    message: `There is a Error in Profile Data`,
+                    message: `There is a Error in User Data`,
                 });
             }
             const profileData = new Users(req.body);
+
             try {
                 const user = await profileData.save();
+                console.log(user)
                 res.status(201).json(user);
             } catch {
                 res.status(400).json({
@@ -34,3 +35,5 @@ router
             }
         }
     );
+
+
