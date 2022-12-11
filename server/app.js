@@ -8,6 +8,8 @@ import mongoose from "mongoose";
 
 import { router as addProfile } from "../server/routes/addProfile.js";
 import { router as login } from '../server/routes/login.js'
+import { router as postPeep } from "./routes/postPeeps.js";
+import { router as allPeeps } from "./routes/getAllPeeps.js";
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -29,6 +31,8 @@ app.use(cors());
 
 app.use(`/register`, addProfile);
 app.use(`/login`, login);
+app.use('/composepeep', postPeep)
+app.use('/allpeeps', allPeeps)
 
 
 dbConnection();

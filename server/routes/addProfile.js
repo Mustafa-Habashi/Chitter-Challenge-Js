@@ -1,6 +1,10 @@
+
 import express from "express";
 import { check, validationResult } from "express-validator";
 import Users from "../models/userModel.js";
+import bcryptjs from 'bcrypt'
+
+
 export const router = express.Router();
 
 router
@@ -22,12 +26,15 @@ router
                     message: `There is a Error in User Data`,
                 });
             }
-            const profileData = new Users(req.body);
+
 
             try {
-                const user = await profileData.save();
-                console.log(user)
+                req.body.password = await bcryptjs.hash(req.body.password, 10)
+
+                const user = await (await Users.create(req.body)).save();
                 res.status(201).json(user);
+
+                res.json(user);
             } catch {
                 res.status(400).json({
                     message: `Failed to create new user`,

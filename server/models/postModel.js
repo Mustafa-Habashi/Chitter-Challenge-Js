@@ -2,10 +2,9 @@ import mongoose, { Schema } from "mongoose";
 
 const postSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String
     },
-    text: { type: String },
+    text: { type: String, require: true },
     createdAt: {
         type: Date,
         default: Date.now()

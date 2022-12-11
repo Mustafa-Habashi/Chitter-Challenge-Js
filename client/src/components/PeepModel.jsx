@@ -1,17 +1,21 @@
 import React from 'react'
 
-function PeepModel() {
+function PeepModel({ allPeeps }) {
     return (
         <div>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">UserName</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Date it was created</small></p>
-                </div>
+            {allPeeps.map(data =>
 
-            </div>
-        </div>
+                <div div class="card" key={data._id} >
+                    <div class="card-body">
+                        <h6 class="card-title">UserName: {data.author}</h6>
+                        <p class="card-text">{data.text}</p>
+                        <p class="card-text"><small class="text-muted">Posted: {data.createdAt}</small></p>
+                    </div>
+
+                </div>
+            )}
+
+        </div >
     )
 }
 

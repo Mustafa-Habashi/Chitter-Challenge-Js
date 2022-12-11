@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode'
 
 function LoginPage({ setUser: setLoginUser }) {
+
+    const getUsername = localStorage.getItem('username')
 
     const [user, setUser] = useState({
         email: ``,
@@ -22,16 +25,17 @@ function LoginPage({ setUser: setLoginUser }) {
     const login = async (e) => {
         e.preventDefault();
         const res = await axios.post(`http://localhost:4000/login`, user);
-        alert(res.data.message);
-        console.dir(res.data.user);
-        setLoginUser(res.data.user);
+        console.log(res)
+        const userData = jwt_decode(res.data.token)
+        setLoginUser(userData);
+        localStorage.setItem('username', userData.username)
         setUser({ email: ``, password: `` });
-        setLoggedIn(res.data.user ? true : false);
+        setLoggedIn(userData ? true : false);
     }
 
     return (
         <div>
-            {loggedIn ? <Navigate to="/"></Navigate> :
+            {loggedIn && getUsername ? <Navigate to="/"></Navigate> :
 
                 <form style={{ width: '18rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={login} >
 
