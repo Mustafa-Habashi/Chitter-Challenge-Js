@@ -33,6 +33,7 @@ router
 
                 const user = await (await Users.create(req.body)).save();
                 res.status(201).json(user);
+                res.send({ message: `Registration successful` })
 
                 res.json(user);
             } catch {

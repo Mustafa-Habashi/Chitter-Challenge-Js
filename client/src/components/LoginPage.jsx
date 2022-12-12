@@ -25,7 +25,6 @@ function LoginPage({ setUser: setLoginUser }) {
     const login = async (e) => {
         e.preventDefault();
         const res = await axios.post(`http://localhost:4000/login`, user);
-        console.log(res)
         const userData = jwt_decode(res.data.token)
         setLoginUser(userData);
         localStorage.setItem('username', userData.username)

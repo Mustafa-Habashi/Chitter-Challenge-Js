@@ -7,25 +7,20 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import axios from 'axios';
-
+import { getData } from './asyncFunctions/externalDataHandlers';
 
 
 function App() {
   const [user, setUser] = useState({});
-
+  const [errorStatus, setErrorStatus] = useState();
   const [allPeeps, setAllPeeps] = useState([]);
 
+  const getDataHandler = () => {
+    getData(setAllPeeps, setErrorStatus);
+  };
+
   useEffect(() => {
-    const getAllPeeps = async () => {
-      try {
-        const response = await axios.get(`http://localhost:4000/allpeeps`)
-        setAllPeeps(response.data)
-      }
-      catch (error) {
-        console.log(error)
-      }
-    }
-    getAllPeeps()
+    getDataHandler()
   }, [])
 
   return (
@@ -33,7 +28,7 @@ function App() {
       <Router>
         <Header></Header>
         <Routes>
-          <Route path='/' element={<HomePage peepData={allPeeps}></HomePage>}></Route>
+          <Route path='/' element={<HomePage peepData={allPeeps} getAllPeeps={getDataHandler}></HomePage>}></Route>
           <Route path='/register' element={<SignUpPage></SignUpPage>}></Route>
           <Route path='/login' element={<LoginPage setUser={setUser}></LoginPage>}></Route>
 

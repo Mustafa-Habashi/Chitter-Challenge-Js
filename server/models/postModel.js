@@ -2,9 +2,9 @@ import mongoose, { Schema } from "mongoose";
 
 const postSchema = new Schema({
     author: {
-        type: String
+        type: String, required: true
     },
-    text: { type: String, require: true },
+    text: { type: String, required: true },
     createdAt: {
         type: Date,
         default: Date.now()

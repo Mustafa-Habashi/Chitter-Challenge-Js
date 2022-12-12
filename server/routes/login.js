@@ -11,23 +11,6 @@ export const router = express.Router();
 const { SECRET = "secret" } = process.env;
 
 
-
-// router.route(`/`)
-//     .post((req, res) => {
-//         const { email, password } = req.body;
-
-//         Users.findOne({ email }, (err, user) => {
-//             if (user && password === user.password) {
-//                 res.send({ message: `Login success`, user });
-//             }
-//             else {
-//                 res.status(404).send({ message: `Details not found` });
-//             }
-
-//         });
-//     });
-
-
 router.route('/')
     .post(async (req, res) => {
         try {
@@ -37,7 +20,10 @@ router.route('/')
             if (user) {
                 console.log(user)
                 //check if password matches
+
                 const result = await bcryptjs.compare(req.body.password, String(user.password).trim());
+
+                console.log(result)
 
                 if (result) {
 

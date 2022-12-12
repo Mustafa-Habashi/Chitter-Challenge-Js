@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import PeepModel from './PeepModel'
 import axios from 'axios'
 
-function HomePage({ peepData }) {
+function HomePage({ peepData, getAllPeeps }) {
 
     const getUsername = localStorage.getItem('username')
 
@@ -31,8 +31,8 @@ function HomePage({ peepData }) {
 
     const postPeep = async (e) => {
         e.preventDefault();
-        console.log(peep)
         const res = await axios.post(`http://localhost:4000/composepeep`, peep);
+        getAllPeeps();
         console.log(res)
         setPeep({
             text: '',
@@ -43,11 +43,14 @@ function HomePage({ peepData }) {
 
     return (
         <>
-            <h3>Trending Today</h3>
-            <button type="button" class="btn btn-primary" onClick={() => {
+
+            <h3 style={{ margin: '10px' }}>Trending Today</h3>
+            {getUsername ? <button type="button" class="btn btn-primary" onClick={() => {
                 modal.show()
 
-            }} >Open modal for @mdo</button>
+            }} style={{ padding: '10px', margin: '10px' }}>Post a Peep</button> : null}
+
+
 
             <div class="modal fade" ref={exampleModal} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -63,7 +66,7 @@ function HomePage({ peepData }) {
                                     <input type="text" class="form-control" id="recipient-name"></input>
                                 </div> */}
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label" >Message:</label>
+                                    <label for="message-text" class="col-form-label" placeholder='Enter Message' >Message:</label>
                                     <textarea class="form-control" id="message-text" name='text' value={peep.text} onChange={handleChange}></textarea>
                                 </div>
 
@@ -76,7 +79,7 @@ function HomePage({ peepData }) {
                                     <button type="submit" class="btn btn-primary" onClick={() => {
                                         modal.hide()
 
-                                    }}>Send message</button>
+                                    }} data-testid="required-button">Send message</button>
                                 </div>
                             </form>
 
@@ -84,7 +87,9 @@ function HomePage({ peepData }) {
                     </div>
                 </div>
             </div>
-            <PeepModel allPeeps={peepData}></PeepModel>
+            <div class='peepModel'>
+                <PeepModel allPeeps={peepData}></PeepModel>
+            </div>
         </>
     )
 }

@@ -9,7 +9,8 @@ router
     .route(`/`)
     .post(
         [
-            check("text").exists().trim().escape()
+            check("text").exists().trim().escape(),
+            check("author").exists().trim().escape()
         ],
 
 

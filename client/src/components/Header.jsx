@@ -19,11 +19,15 @@ function Header() {
                     </button>
 
                     <ul class="nav justify-content-end">
+                        {isLoggedin ? <li class="nav-item">
+                            <h6 class="nav-link active" style={{ color: 'black', marginTop: '4px' }} >Welcome {isLoggedin}</h6>
+                        </li> : null}
+
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">My Profile</a>
+                            <a class="nav-link" href="/register">Register</a>
                         </li>
                         <li class="nav-item">
                             {isLoggedin ? <a class="nav-link" href="/" onClick={handleClick}> Log Out</a> : <a class="nav-link" href="/login"> Login</a>}
