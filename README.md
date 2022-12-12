@@ -1,67 +1,105 @@
 Chitter Challenge
 =================
 
-* Feel free to use Google, your notes, books, etc. but work on your own
-* If you refer to the solution of another coach or trainee, please put a link to that in your README
-* If you have a partial solution, **still check in a partial solution**
-* You must submit your work by 9:30am Monday morning
-
-Challenge:
--------
+To start the application
 
 As usual please start by forking this repo.
 
-We are going to write a small twitter clone that will allow users to post messages to a public wall.
+* `cd client`
+* `npm i` - to install all the dependencies required
+* `npm start` - to start the REACT app
 
-Good luck and let the chitter begin!
+Open up a new terminal within VSC and:
 
-Features:
+* `cd server`
+* `npm i` - to install the dependencies
+* `npm start` - to start the server
+
+
+
+For Testing open up separate terminals for the client and server side
+
+* `cd client`
+* `npm test`
+
+For Server side
+
+* `cd server`
+* `npm test`
+
+
+
+-------
+### Schemas and models
+Looking at the requirements for the acceptance criteria. I decided the schema for the user to sign up will require an
+* Full name `type String`
+* Username `type String`
+* Email `type String`
+* Password `type String` encrypted
+
+For the peep schema and model I went for the text and date it was created to be deisplayed and also the author of the peep aka the username when signed in:
+* text `type String`
+* author `type String`
+* date `type new Date`
+
+
 -------
 
-### Standard Acceptance Criteria
+## Testing
+### Backend Register Route
 ```
-As a trainee software engineer
-So that I can let people know what I am doing  
-I want to post a message (peep) to chitter
+1. tests when invalid username input should send back status (422) and error message
+1. tests when invalid email input should send back status (422) and error message
+1. tests when invalid password input should send back status (422) and error message
+1. tests when invalid name input should send back status (422) and error message
 
-As a trainee
-So that I can see what others are saying  
-I want to see all peeps in reverse chronological order
+```
+### FrontEnd React tests
+### Header test
+```
+1. It should create a snapshot of the component Header
 
-As a trainee
-So that I can better appreciate the context of a peep
-I want to see the time at which it was made
+```
+### Footer test
+```
+1. It should create a snapshot of the component Header
 
-As a trainee
-So that I can post messages on Chitter as me
-I want to sign up for Chitter
+```
+### HomePage test
+```
+1. tests for certain Header text to be in document
+2. tests for role of button to be within document
 
-As a trainee
-So that only I can post messages on Chitter as me
-I want to log in to Chitter
-
-As a trainee
-So that I can avoid others posting messages on Chitter as me
-I want to log out of Chitter
 ```
 
-Additional requirements:
+### LoginPage test
+```
+1. tests for email input box to be rendered in
+2. tests for password input box to be rendered in
+3. tests that the value of email inputed matches and exists
+4. tests that the value of password inputed matches and exists
+
+```
+### Signup Page test
+```
+1. tests for email input box to be rendered in
+2. tests for password input box to be rendered in
+3. tests for name input box to be rendered in
+4. tests for username input box to be rendered in
+5. tests that the value of email inputed matches and exists
+6. tests that the value of password inputed matches and exists
+7. tests that the value of username inputed matches and exists
+8. tests that the value of name inputed matches and exists
+
+```
+
+## Reflection:
 ------
+## Changes for the future
+- I will want to update my UI and make it more user friendly, researching more and UI frameworks that are simpler to use and easier to test in unit testing
 
-* You don't have to be logged in to see the peeps.
-* Trainee software engineers sign up to chitter with their email, password, name and a username (e.g. ewithers@digitalfutures.com, password123, Edward Withers, dearshrewdwit).
-* The username and email are unique.
-* Peeps (posts to chitter) have the name of the trainee and their user handle.
-* Your README should indicate the technologies used, and give instructions on how to install and run the tests.
+- Create more unit test. In this challenge and in general i struggle at unit testing not knowing what to test and test failing. I will want to create tests testing components functionality, navigiation and more.
 
-### Extended Acceptance Criteria
+- I will want to make the login more secure hide the users details and user loading effects and time as pages jsut flash before your eyes.
 
-```
-As a trainee
-So that I can stay constantly tapped in to the shouty box of Chitter
-I want to receive an email if I am tagged in a Peep
-
-As a trainee
-In order to start a conversation as a DFA trainee Software Engineer
-I want to reply to a peep from another trainee.
-```
+- I will want to deploy the code on to a website. Host it to netlify maybe.
