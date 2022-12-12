@@ -33,10 +33,10 @@ function LoginPage({ setUser: setLoginUser }) {
     }
 
     return (
-        <div>
+        <div style={{ padding: '10px' }}>
             {loggedIn && getUsername ? <Navigate to="/"></Navigate> :
 
-                <form style={{ width: '18rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={login} >
+                <form style={{ width: '50rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={login} >
 
                     <div class="form-floating mb-3" >
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" value={user.email} onChange={handleChange}></input>
@@ -47,7 +47,7 @@ function LoginPage({ setUser: setLoginUser }) {
                         <label for="floatingPassword">Password</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" style={{ marginTop: '10px' }}>Login</button>
                 </form>
             }
         </div>

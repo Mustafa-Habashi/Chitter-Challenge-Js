@@ -1,7 +1,10 @@
 import { useState } from "react"
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 
 const SignUpPage = () => {
+
+    const navigate = useNavigate()
 
     const [newUser, setCreateUser] = useState({
         name: ``,
@@ -28,7 +31,9 @@ const SignUpPage = () => {
         if (name && userName && email && password) {
 
             const res = await axios.post(`http://localhost:4000/register`, newUser)
+            res.data.message = 'Registration Successful'
             alert(res.data.message)
+
 
 
             setCreateUser({
@@ -38,6 +43,9 @@ const SignUpPage = () => {
                 password: ``
 
             })
+
+            navigate('/login')
+
             return;
         }
         alert('Invalid input')
@@ -48,13 +56,13 @@ const SignUpPage = () => {
 
 
     return (
-        <div>
+        <div style={{ padding: '10px' }}>
 
 
 
 
 
-            <form style={{ width: '18rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={signUp} >
+            <form style={{ width: '50rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={signUp} >
                 <div class="form-floating mb-3"  >
                     <input type="name" class="form-control" id="floatingInput" placeholder="John Smith" name="name" value={newUser.name} onChange={handleChange}></input>
                     <label for="floatingInput">Full Name</label>
@@ -70,13 +78,9 @@ const SignUpPage = () => {
                 <div class="form-floating" >
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" value={newUser.password} onChange={handleChange}></input>
                     <label for="floatingPassword">Password</label>
-                    <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                            Must be 8-20 characters long.
-                        </span>
-                    </div></div>
+                </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" style={{ marginTop: '10px' }}>Submit</button>
             </form>
 
 

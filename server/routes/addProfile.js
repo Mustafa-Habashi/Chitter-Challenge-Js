@@ -32,10 +32,9 @@ router
                 req.body.password = await bcryptjs.hash(req.body.password, 10)
 
                 const user = await (await Users.create(req.body)).save();
-                res.status(201).json(user);
-                res.send({ message: `Registration successful` })
-
+                res.status(201)
                 res.json(user);
+
             } catch {
                 res.status(400).json({
                     message: `Failed to create new user`,

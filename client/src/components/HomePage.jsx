@@ -88,6 +88,7 @@ function HomePage({ peepData, getAllPeeps }) {
                 </div>
             </div>
             <div class='peepModel'>
+
                 <PeepModel allPeeps={peepData}></PeepModel>
             </div>
         </>
